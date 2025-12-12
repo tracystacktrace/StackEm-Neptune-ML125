@@ -1,7 +1,7 @@
 [
   {
     "modid": "mod_StackEmNeptune",
-    "name": "§eStack 'Em Neptune",
+    "name": "Stack 'Em Neptune",
     "version": "1.2",
     "url": "https://modrinth.com/mod/stack-em-neptune",
     "updateUrl": "https://modrinth.com/mod/stack-em-neptune",
@@ -9,7 +9,7 @@
       "tracystacktrace"
     ],
     "description": "A ModLoader/Forge modification which allows to load and use several texturepacks simultaneously and adds runtime texture gluing!",
-    "logoFile": "/assets/stackemneptune/icon.png",
+    "logoFile": "/assets/stackemneptune/mod_logo.png",
     "parent": "",
     "credits": "",
     "screenshots": [
