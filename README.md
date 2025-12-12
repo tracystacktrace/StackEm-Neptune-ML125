@@ -9,20 +9,23 @@
 
 <div align="center" style="text-align: center;">
 
-![](https://github.com/tracystacktrace/StackEm-Neptune-ML/raw/master/docs/mod_logo.png)
+![](https://github.com/tracystacktrace/StackEm-Neptune-ML/raw/ml_b173/docs/mod_logo.png)
 
 [![Available on - Modrinth](https://img.shields.io/badge/Available_on-Modrinth-4bab62?logo=modrinth&logoColor=white)](https://modrinth.com/mod/stack-em-neptune) ![GitHub License](https://img.shields.io/github/license/tracystacktrace/StackEm-Neptune-ML125?label=License&color=blue) ![GitHub Tag](https://img.shields.io/github/v/tag/tracystacktrace/StackEm-Neptune-ML125?label=Version)
 
 </div>
-
-![](https://github.com/tracystacktrace/StackEm-Neptune-ML/raw/master/docs/screenshot_b173_0.png)
-
 
 **Stack 'Em Neptune** is a compact and lightweight version of original [**Stack 'Em**](https://modrinth.com/mod/stack-em) mod that is designed to provide maximum compatibility for most vanilla/modded minecraft versions.
 
 This is done by using either ModLoader or Forge entrypoints with some Java reflections performed in some places.
 
 **Why so?** Because original Stack 'Em has so many features (a lot :3) available it'd be hard to port and maintain these features in other minecraft versions. Sorry!
+
+![](https://github.com/tracystacktrace/StackEm-Neptune-ML125/raw/ml_125/docs/screenshot_125_0.png)
+
+> _Used texturepacks for demonstration:_ <br>
+> [1. Pride GUI Legacy (modrinth link)](https://modrinth.com/resourcepack/pridegui-legacy) <br>
+> [2. PureBDcraft 64x (website link)](https://bdcraft.net/downloads/purebdcraft-minecraft/#dl-125)
 
 ## Features & Compatibility
 
