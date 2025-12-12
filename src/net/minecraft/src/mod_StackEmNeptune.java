@@ -73,8 +73,8 @@ public class mod_StackEmNeptune extends BaseMod {
     public void modsLoaded() {
         if (!(ModLoader.getMinecraftInstance().entityRenderer instanceof QuickEntityRenderer)) {
             CompatibilityTools.log("Warning! Something cancelled custom EntityRenderer code; are you using OverrideAPI?");
-            ModLoader.setInGameHook(this, true, true);
-            ModLoader.setInGUIHook(this, true, true);
+            ModLoader.setInGameHook(this, true, false);
+            ModLoader.setInGUIHook(this, true, false);
         }
     }
 
@@ -82,18 +82,16 @@ public class mod_StackEmNeptune extends BaseMod {
     public boolean onTickInGUI(float tick, Minecraft client, GuiScreen gui) {
         if (gui != null && gui.getClass().isAssignableFrom(GuiTexturePacks.class)) {
             client.displayGuiScreen(new GuiTextureStack(((GuiTexturePacks) gui).guiScreen));
-            return true;
         }
-        return false;
+        return true;
     }
 
     @Override
     public boolean onTickInGame(float tick, Minecraft client) {
         if (client.currentScreen != null && client.currentScreen.getClass().isAssignableFrom(GuiTexturePacks.class)) {
             client.displayGuiScreen(new GuiTextureStack(((GuiTexturePacks) client.currentScreen).guiScreen));
-            return true;
         }
-        return false;
+        return true;
     }
 
     static {
