@@ -32,7 +32,7 @@ Available features are:
 
 ## Development
 
-The mod is built within the RetroMCP-Java generated workspace with ModLoader included in jars, and with an applied [ModLoader patch](https://github.com/coffeenotfound/ModloaderFix-b1.7.3).
+The mod is built within the RetroMCP-Java generated workspace with ModLoader included in jars.
 
 I don't think it's very hard to set up one, [follow the guidelines on their github page!](https://github.com/MCPHackers/RetroMCP-Java)
 
