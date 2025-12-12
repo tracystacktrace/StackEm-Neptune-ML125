@@ -7,6 +7,7 @@ jars/
 md5/
 out/
 src_original/
+reobf/
 minecraft.iml
 
 src/

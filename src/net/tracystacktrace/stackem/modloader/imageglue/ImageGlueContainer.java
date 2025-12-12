@@ -65,8 +65,8 @@ public class ImageGlueContainer {
             if (modParts[i]) {
                 final int x = holder.segments[i][0] * scale;
                 final int y = holder.segments[i][1] * scale;
-                final int endX = (x + holder.segments[i][2]) * scale;
-                final int endY = (y + holder.segments[i][3]) * scale;
+                final int endX = (holder.segments[i][0] + holder.segments[i][2]) * scale;
+                final int endY = (holder.segments[i][1] + holder.segments[i][3]) * scale;
 
                 for (int movY = y; movY < endY; movY++) {
                     for (int movX = x; movX < endX; movX++) {

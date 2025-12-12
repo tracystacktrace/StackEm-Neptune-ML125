@@ -3,6 +3,7 @@ package net.minecraft.src;
 import net.minecraft.client.Minecraft;
 import net.tracystacktrace.stackem.modloader.CacheConfig;
 import net.tracystacktrace.stackem.modloader.ModLoaderStackedImpl;
+import net.tracystacktrace.stackem.modloader.gui.GuiTextureStack;
 import net.tracystacktrace.stackem.modloader.imageglue.ImageGlueBridge;
 import net.tracystacktrace.stackem.modloader.imageglue.segment.SegmentsProvider;
 import net.tracystacktrace.stackem.modloader.patch.CompatibilityTools;
@@ -48,8 +49,8 @@ public class mod_StackEmNeptune extends BaseMod {
             client.texturePackList.selectedTexturePack.func_6482_a();
         } else {
             client.texturePackList.setTexturePack(new ModLoaderStackedImpl(client.texturePackList.selectedTexturePack, collector));
+            client.renderEngine.refreshTextures();
         }
-        client.renderEngine.refreshTextures();
 
         ImageGlueBridge.processTexturesSegments(client.renderEngine);
     }
@@ -66,7 +67,6 @@ public class mod_StackEmNeptune extends BaseMod {
 
     @Override
     public void load() {
-        ModLoader.setInGameHook(this, true, true);
     }
 
     @Override
@@ -76,6 +76,24 @@ public class mod_StackEmNeptune extends BaseMod {
             ModLoader.setInGameHook(this, true, true);
             ModLoader.setInGUIHook(this, true, true);
         }
+    }
+
+    @Override
+    public boolean onTickInGUI(float tick, Minecraft client, GuiScreen gui) {
+        if (gui != null && gui.getClass().isAssignableFrom(GuiTexturePacks.class)) {
+            client.displayGuiScreen(new GuiTextureStack(((GuiTexturePacks) gui).guiScreen));
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean onTickInGame(float tick, Minecraft client) {
+        if (client.currentScreen != null && client.currentScreen.getClass().isAssignableFrom(GuiTexturePacks.class)) {
+            client.displayGuiScreen(new GuiTextureStack(((GuiTexturePacks) client.currentScreen).guiScreen));
+            return true;
+        }
+        return false;
     }
 
     static {
