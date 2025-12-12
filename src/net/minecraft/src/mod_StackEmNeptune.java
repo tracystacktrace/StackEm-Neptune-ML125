@@ -67,6 +67,9 @@ public class mod_StackEmNeptune extends BaseMod {
 
     @Override
     public void load() {
+        // Apply quick proxy for faster tick processing
+        final Minecraft client = ModLoader.getMinecraftInstance();
+        client.entityRenderer = new QuickEntityRenderer(client);
     }
 
     @Override
@@ -106,9 +109,6 @@ public class mod_StackEmNeptune extends BaseMod {
 
         CompatibilityTools.log("Initializing mod, applying required patches");
         final Minecraft client = ModLoader.getMinecraftInstance();
-
-        // Apply quick proxy for faster tick processing
-        client.entityRenderer = new QuickEntityRenderer(client);
 
         // Quickly form config folder
         final File configFolder = new File(Minecraft.getMinecraftDir(), "config");

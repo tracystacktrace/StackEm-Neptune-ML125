@@ -5,8 +5,7 @@ import net.minecraft.src.EntityRendererProxy;
 import net.minecraft.src.GuiScreen;
 import net.minecraft.src.GuiTexturePacks;
 import net.tracystacktrace.stackem.modloader.gui.GuiTextureStack;
-
-import java.lang.reflect.Field;
+import net.tracystacktrace.stackem.tools.UnsafeInstance;
 
 /**
  * A very very very crude but nice way to make the GUI swap be done quicker!
@@ -28,14 +27,7 @@ public class QuickEntityRenderer extends EntityRendererProxy {
         super.updateCameraAndRender(f);
     }
 
-
     private GuiScreen getHomeScreen(GuiScreen screen) {
-        try {
-            Field field = GuiTexturePacks.class.getDeclaredField(CompatibilityTools.OBFUSCATED_ENV ? "a" : "guiScreen");
-            field.setAccessible(true);
-            return (GuiScreen) field.get((GuiTexturePacks) screen);
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
+        return UnsafeInstance.getObject(GuiTexturePacks.class, (GuiTexturePacks) screen, CompatibilityTools.OBFUSCATED_ENV ? "a" : "guiScreen");
     }
 }
