@@ -4,7 +4,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.src.GuiSlot;
 import net.minecraft.src.RenderEngine;
 import net.minecraft.src.Tessellator;
-import net.tracystacktrace.stackem.modloader.patch.CompatibilityTools;
 import net.tracystacktrace.stackem.neptune.container.PreviewTexturePack;
 import org.lwjgl.opengl.GL11;
 
@@ -38,21 +37,6 @@ public class GuiTextureStackSlot extends GuiSlot {
             }
         }
         parentScreen.updateMoveButtonsState(index);
-    }
-
-    public void func_27257_b(int mouseX, int mouseY) {
-//        final int startX = (/* this.left */ 0 + this.right) / 2 - /* this.slotWidth */ 220 / 2 + 2 + /* this.slotOffset */ 0;
-//        final float initialY = this.top + 4 - (int) this.amountScrolled + this.field_27261_r;
-//
-//        for (int i = 0; i < this.getSize(); i++) {
-//            final PreviewTexturePack tag = parentScreen.getSequoiaCacheElement(i);
-//
-//            if (!tag.hasBakedCategoriesList()) continue;
-//
-//            if (this.isSlotHovered(mouseX, mouseY, startX, initialY + /* this.slotHeight */ 36 * i)) {
-//                parentScreen.renderCategoriesTooltip(mouseX, mouseY, tag);
-//            }
-//        }
     }
 
     private void bindTexturePackIcon(RenderEngine renderEngine, PreviewTexturePack pack) {
@@ -113,15 +97,6 @@ public class GuiTextureStackSlot extends GuiSlot {
         minecraft.fontRenderer.drawString(tag.firstLine, x + iconHeight + 2, y + 12, 0x00D0D0D0);
         minecraft.fontRenderer.drawString(tag.secondLine, x + iconHeight + 2, y + 12 + 11, 0x00D0D0D0);
     }
-
-//    private boolean isSlotHovered(
-//            final float mouseX,
-//            final float mouseY,
-//            final int x,
-//            final float y
-//    ) {
-//        return mouseX > x && mouseX < (x + 320) && mouseY > y && mouseY < (y + 36);
-//    }
 
     public String limitString(String line, final int length, final boolean endDots) {
         if (line == null || line.length() < length) {

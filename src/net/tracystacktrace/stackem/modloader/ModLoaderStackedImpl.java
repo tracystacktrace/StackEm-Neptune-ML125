@@ -40,10 +40,12 @@ public class ModLoaderStackedImpl extends TexturePackBase {
     }
 
     @Override
-    public void unbindThumbnailTexture(Minecraft var1) {}
+    public void unbindThumbnailTexture(Minecraft var1) {
+    }
 
     @Override
-    public void bindThumbnailTexture(Minecraft var1) {}
+    public void bindThumbnailTexture(Minecraft var1) {
+    }
 
     @Override
     public InputStream getResourceAsStream(String resourcePath) {
