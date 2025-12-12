@@ -11,7 +11,7 @@
 
 ![](https://github.com/tracystacktrace/StackEm-Neptune-ML/raw/master/docs/mod_logo.png)
 
-[![Available on - Modrinth](https://img.shields.io/badge/Available_on-Modrinth-4bab62?logo=modrinth&logoColor=white)](https://modrinth.com/mod/stack-em-neptune) ![GitHub License](https://img.shields.io/github/license/tracystacktrace/StackEm-Neptune-ML?label=License&color=blue) ![GitHub Tag](https://img.shields.io/github/v/tag/tracystacktrace/StackEm-Neptune-ML?label=Version)
+[![Available on - Modrinth](https://img.shields.io/badge/Available_on-Modrinth-4bab62?logo=modrinth&logoColor=white)](https://modrinth.com/mod/stack-em-neptune) ![GitHub License](https://img.shields.io/github/license/tracystacktrace/StackEm-Neptune-ML125?label=License&color=blue) ![GitHub Tag](https://img.shields.io/github/v/tag/tracystacktrace/StackEm-Neptune-ML125?label=Version)
 
 </div>
 
