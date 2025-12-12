@@ -33,6 +33,9 @@ Available features are:
 - **Texture Stacking:** you can use several textures by order simultaneously!
 - **Runtime Item Gluing:** now if two texturepacks change the different parts of the same texture (see below), they will be "glued" together.
 
+**Compatible with Forge, Optifine and MCPatcher.**<br>
+**Not sure about modpacks (i.e. Tekkit) compatibility, but should work fine!**
+
 ## Development
 
 The mod is built within the RetroMCP-Java generated workspace with ModLoader included in jars.
