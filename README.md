@@ -1,7 +1,7 @@
 
 > [!WARNING]  
 > This source set of Stack 'Em Neptune is supported on following environments:
-> - **ModLoader/Forge 1.2.5**: `-ml` suffix.
+> - **ModLoader/Forge 1.2.5**: `-ml125` suffix.
 >
 > For other supported minecraft versions ports, please follow these links: <br>
 > **b1.7.3**: https://github.com/tracystacktrace/StackEm-Neptune-ML <br>
