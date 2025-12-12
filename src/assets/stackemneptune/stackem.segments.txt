@@ -1,5 +1,6 @@
-# Vanilla b1.7.3 segments descriptor file
+# Vanilla 1.2.5 segments descriptor file
 # compiled by tracystacktrace
 
 /gui/items.png: square_gen 16 16 256 256
 /terrain.png: square_gen 16 16 256 256
+/particles.png: square_gen 8 8 128 128
