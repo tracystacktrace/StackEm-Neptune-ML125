@@ -1,0 +1,24 @@
+# StackEm Neptune - Default (Vanilla) MC lang set
+# created by tracystacktrace
+
+# GUI elements/labels
+stackem.gui.done=§cSAVE§r & Exit
+stackem.gui.folder=Open Folder
+stackem.gui.hint1=Double-click a texture pack to include/remove
+stackem.gui.hint2=Only "§e.zip§r" texturepacks are §esupported§r!
+stackem.gui.actions=Actions:
+
+# icons
+stackem.icon.folder=§9F
+stackem.icon.info=§bi
+stackem.icon.cross=§4X
+stackem.icon.tick=§a+
+stackem.icon.moveUp=§9^
+stackem.icon.moveDown=§9v
+
+# buttons hint
+stackem.button.add=Add to stack
+stackem.button.remove=Remove from stack
+stackem.button.moveup=Move up
+stackem.button.movedown=Move down
+stackem.button.sha256=Copy SHA-256 of ZIP

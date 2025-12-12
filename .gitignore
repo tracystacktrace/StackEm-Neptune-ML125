@@ -1,0 +1,16 @@
+
+.idea/
+bin/
+client_resources/
+game/
+jars/
+md5/
+out/
+src_original/
+minecraft.iml
+
+src/
+
+
+!src/net/minecraft/src/mod_StackEmNeptune.java
+!src/net/tracystacktrace/stackem/

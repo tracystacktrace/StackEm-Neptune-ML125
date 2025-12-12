@@ -1,0 +1,105 @@
+package net.minecraft.src;
+
+import net.minecraft.client.Minecraft;
+import net.tracystacktrace.stackem.modloader.CacheConfig;
+import net.tracystacktrace.stackem.modloader.ModLoaderStackedImpl;
+import net.tracystacktrace.stackem.modloader.imageglue.ImageGlueBridge;
+import net.tracystacktrace.stackem.modloader.imageglue.segment.SegmentsProvider;
+import net.tracystacktrace.stackem.modloader.patch.CompatibilityTools;
+import net.tracystacktrace.stackem.modloader.patch.QuickEntityRenderer;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+
+public class mod_StackEmNeptune extends BaseMod {
+
+    public static void applyCachedTexturepackStack(Minecraft client, boolean init, File configFolder) {
+        // Fallback to default texturepack
+
+        final List<File> collector = new ArrayList<>();
+        final String[] candidates = CacheConfig.getCacheData(configFolder);
+        final File[] files = CacheConfig.getPossibleTexturePacks(Minecraft.getMinecraftDir());
+
+        // Stream to collect enough data
+        Arrays.stream(candidates)
+                .map(c -> Arrays.stream(files)
+                        .filter(f -> f.getName().toLowerCase().endsWith(".zip"))
+                        .filter(f -> f.getName().contains(c))
+                        .findFirst()
+                        .orElse(null))
+                .filter(Objects::nonNull)
+                .forEach(collector::add);
+
+        if (init) {
+            CompatibilityTools.log("How many texturepacks were pre-fetched? " + collector.size());
+        }
+
+        if (client.texturePackList.selectedTexturePack != null) {
+            client.texturePackList.selectedTexturePack.closeTexturePackFile();
+        }
+        client.texturePackList.selectedTexturePack = new TexturePackDefault();
+
+        // Force set current texturepack as StackEm internal implementation
+        if (init) {
+            client.texturePackList.selectedTexturePack = new ModLoaderStackedImpl(client.texturePackList.selectedTexturePack, collector);
+            client.texturePackList.selectedTexturePack.func_6482_a();
+        } else {
+            client.texturePackList.setTexturePack(new ModLoaderStackedImpl(client.texturePackList.selectedTexturePack, collector));
+        }
+        client.renderEngine.refreshTextures();
+
+        ImageGlueBridge.processTexturesSegments(client.renderEngine);
+    }
+
+    @Override
+    public String getVersion() {
+        return "1.2";
+    }
+
+    @Override
+    public String getName() {
+        return "Stack 'Em Neptune";
+    }
+
+    @Override
+    public void load() {
+        ModLoader.setInGameHook(this, true, true);
+    }
+
+    @Override
+    public void modsLoaded() {
+        if (!(ModLoader.getMinecraftInstance().entityRenderer instanceof QuickEntityRenderer)) {
+            CompatibilityTools.log("Warning! Something cancelled custom EntityRenderer code; are you using OverrideAPI?");
+            ModLoader.setInGameHook(this, true, true);
+            ModLoader.setInGUIHook(this, true, true);
+        }
+    }
+
+    static {
+        CompatibilityTools.log("Preparing the environment, thinking very hard!");
+        CompatibilityTools.getKnownWithEnvironment();
+        CompatibilityTools.obtainCurrentLang();
+        SegmentsProvider.loadSegmentsData();
+
+        if (!CompatibilityTools.OBFUSCATED_ENV) {
+            CompatibilityTools.log("Running in DEV environment, no obfuscation present!");
+        }
+
+        CompatibilityTools.log("Initializing mod, applying required patches");
+        final Minecraft client = ModLoader.getMinecraftInstance();
+
+        // Apply quick proxy for faster tick processing
+        client.entityRenderer = new QuickEntityRenderer(client);
+
+        // Quickly form config folder
+        final File configFolder = new File(Minecraft.getMinecraftDir(), "config");
+        if (!configFolder.exists()) {
+            configFolder.mkdirs();
+        }
+
+        applyCachedTexturepackStack(client, true, configFolder);
+    }
+}
