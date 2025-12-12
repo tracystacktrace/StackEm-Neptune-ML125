@@ -58,7 +58,7 @@ public class GuiTextureStack extends GuiScreen {
         this.controlList.add(openFolder);
 
         // save & close
-        this.controlList.add(new GuiButton(-2, this.width - 125, this.height - 25, 120, 20, CompatibilityTools.translateKey("stackem.gui.done")));
+        this.controlList.add(new GuiButtonHover(-2, this.width - 125, this.height - 25, 120, 20, CompatibilityTools.translateKey("stackem.gui.done"), null));
 
         // slot manager
         this.slotManager = new GuiTextureStackSlot(this.mc, this, this.width, this.height);

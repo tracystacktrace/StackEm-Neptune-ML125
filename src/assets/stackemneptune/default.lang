@@ -13,8 +13,8 @@ stackem.icon.folder=§9F
 stackem.icon.info=§bi
 stackem.icon.cross=§4X
 stackem.icon.tick=§a+
-stackem.icon.moveUp=§9^
-stackem.icon.moveDown=§9v
+stackem.icon.moveUp=§9U
+stackem.icon.moveDown=§9D
 
 # buttons hint
 stackem.button.add=Add to stack
