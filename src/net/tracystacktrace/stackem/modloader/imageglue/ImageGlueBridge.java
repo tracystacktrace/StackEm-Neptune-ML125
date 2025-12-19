@@ -10,6 +10,7 @@ import net.tracystacktrace.stackem.modloader.patch.CompatibilityTools;
 import net.tracystacktrace.stackem.modloader.patch.RenderEngineHacks;
 import net.tracystacktrace.stackem.neptune.container.ZipDrivenTexturePack;
 import net.tracystacktrace.stackem.tools.ImageHelper;
+import net.tracystacktrace.stackem.tools.SystemIOTools;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ import java.util.List;
 public class ImageGlueBridge {
     public static void processTexturesSegments(RenderEngine renderEngine) {
         if (SegmentsProvider.TEXTURES == null) {
-            CompatibilityTools.log("No image glue description file is provided, ignoring!");
+            SystemIOTools.log("No image glue description file is provided, ignoring!");
             return;
         }
 
@@ -44,7 +45,7 @@ public class ImageGlueBridge {
         final ModLoaderStackedImpl stacked = ((ModLoaderStackedImpl) ModLoader.getMinecraftInstance().texturePackList.selectedTexturePack);
         final TexturePackDefault defaultPack = (TexturePackDefault) stacked.getDefaultTexturePack();
 
-        final ImageGlueContainer original = new ImageGlueContainer(ImageHelper.readImage(defaultPack::getResourceAsStream, name.texture));
+        final ImageGlueContainer original = new ImageGlueContainer(ImageHelper.readImageAndClose(defaultPack.getResourceAsStream(name.texture)));
         final List<BufferedImage> images = new ArrayList<>();
 
         //fetching texturepacks that can into gluing
@@ -66,9 +67,9 @@ public class ImageGlueBridge {
         }
 
         if (changesNum != 0) {
-            CompatibilityTools.log(String.format("Overwrote %s image segments for %s", changesNum, name.texture));
+            SystemIOTools.log(String.format("Overwrote %s image segments for %s", changesNum, name.texture));
         } else {
-            CompatibilityTools.log(String.format("No image segments gluing candidates were found for %s", name.texture));
+            SystemIOTools.log(String.format("No image segments gluing candidates were found for %s", name.texture));
         }
 
         //clean-up process

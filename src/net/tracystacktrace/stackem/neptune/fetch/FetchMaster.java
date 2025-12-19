@@ -1,8 +1,7 @@
 package net.tracystacktrace.stackem.neptune.fetch;
 
-import net.tracystacktrace.stackem.modloader.patch.CompatibilityTools;
 import net.tracystacktrace.stackem.neptune.container.PreviewTexturePack;
-import net.tracystacktrace.stackem.tools.SafetyTools;
+import net.tracystacktrace.stackem.tools.SystemIOTools;
 import net.tracystacktrace.stackem.tools.ZipFileHelper;
 
 import java.awt.image.BufferedImage;
@@ -50,40 +49,34 @@ public final class FetchMaster {
         // Calculate the SHA-256 of texturepack
         String sha256;
         try {
-            sha256 = SafetyTools.getSHA256(texturepackFile);
+            sha256 = SystemIOTools.computeSHA256(texturepackFile);
         } catch (IOException e) {
             sha256 = "N/A";
-            CompatibilityTools.log(String.format("Failed to caclulate SHA-256 for the zip file %s", texturepackFile.getName()));
-            CompatibilityTools.log(e.getMessage());
+            SystemIOTools.log(String.format("Failed to caclulate SHA-256 for the zip file %s", texturepackFile.getName()));
+            SystemIOTools.log(e.getMessage());
         }
 
         // Read the inside of the zip file
         try (final ZipFile zipFile = new ZipFile(texturepackFile)) {
             // Get pack.txt description lines
-            final String[] packTxtContent = ZipFileHelper.readTextFile(zipFile, "pack.txt", reader -> {
-                final String line1 = reader.readLine();
-                final String line2 = reader.readLine();
-                return new String[]{line1, line2};
-            });
+            final String[] packTxtContent = ZipFileHelper.readTextFile(zipFile, "pack.txt");
 
             // If pack.txt is empty - ignore
-            if (packTxtContent == null) {
-                CompatibilityTools.log(String.format("File %s does not contain pack.txt, ignoring", texturepackFile.getName()));
+            if (packTxtContent == null || packTxtContent.length < 1) {
+                SystemIOTools.log(String.format("File %s does not contain pack.txt, ignoring", texturepackFile.getName()));
                 return null;
             }
 
             // Safely handle empty strings of pack.txt
-            if (packTxtContent[0] == null || packTxtContent[0].isEmpty())
-                packTxtContent[0] = "";
-            if (packTxtContent[1] == null || packTxtContent[1].isEmpty())
-                packTxtContent[1] = "";
+            final String firstLine = (packTxtContent[0] == null || packTxtContent[0].isEmpty()) ? "" : packTxtContent[0];
+            final String secondLine = (packTxtContent.length < 2 || packTxtContent[1] == null || packTxtContent[1].isEmpty()) ? "" : packTxtContent[1];
 
             // Construct a preview instance
             final PreviewTexturePack pack = new PreviewTexturePack(
                     texturepackFile,
                     texturepackFile.getName(),
-                    packTxtContent[0],
-                    packTxtContent[1],
+                    firstLine,
+                    secondLine,
                     sha256
             );
 

@@ -5,13 +5,13 @@ import net.minecraft.src.GuiButton;
 import net.minecraft.src.GuiScreen;
 import net.minecraft.src.TexturePackDefault;
 import net.minecraft.src.mod_StackEmNeptune;
-import net.tracystacktrace.stackem.modloader.CacheConfig;
 import net.tracystacktrace.stackem.modloader.ModLoaderStackedImpl;
 import net.tracystacktrace.stackem.modloader.imageglue.ImageGlueBridge;
 import net.tracystacktrace.stackem.modloader.patch.CompatibilityTools;
 import net.tracystacktrace.stackem.neptune.container.PreviewTexturePack;
 import net.tracystacktrace.stackem.neptune.fetch.FetchMaster;
-import net.tracystacktrace.stackem.tools.SafetyTools;
+import net.tracystacktrace.stackem.tools.CacheConfig;
+import net.tracystacktrace.stackem.tools.SystemIOTools;
 import org.lwjgl.opengl.Display;
 
 import java.awt.*;
@@ -122,7 +122,7 @@ public class GuiTextureStack extends GuiScreen {
             if (button.id == -106) {
                 final String securityString = sequoiaCache.get(this.slotManager.selectedIndex).sha256;
                 if (securityString != null && !securityString.equals("N/A")) {
-                    SafetyTools.setClipboardText(securityString);
+                    SystemIOTools.setClipboardText(securityString);
                 }
                 return;
             }

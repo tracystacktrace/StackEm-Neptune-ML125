@@ -1,6 +1,7 @@
 package net.tracystacktrace.stackem.modloader.imageglue.segment;
 
 import net.tracystacktrace.stackem.modloader.patch.CompatibilityTools;
+import net.tracystacktrace.stackem.tools.SystemIOTools;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -17,7 +18,7 @@ public final class SegmentsProvider {
     public static void loadSegmentsData() {
         final InputStream inputStream = CompatibilityTools.class.getResourceAsStream("/assets/stackemneptune/stackem.segments.txt");
         if (inputStream == null) {
-            CompatibilityTools.log("Couldn't find stackem.segments.txt! Corrupted mod zip?");
+            SystemIOTools.log("Couldn't find stackem.segments.txt! Corrupted mod zip?");
             return;
         }
 
@@ -33,7 +34,7 @@ public final class SegmentsProvider {
                 candidates.add(tryToUnpack(line));
             }
         } catch (IOException e) {
-            CompatibilityTools.log("Failed to load stackem.segments.txt, expect problems: " + e.getMessage());
+            SystemIOTools.log("Failed to load stackem.segments.txt, expect problems: " + e.getMessage());
             e.printStackTrace();
         }
 

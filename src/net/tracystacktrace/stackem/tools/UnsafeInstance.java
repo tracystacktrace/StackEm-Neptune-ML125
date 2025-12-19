@@ -4,7 +4,7 @@ import sun.misc.Unsafe;
 
 import java.lang.reflect.Field;
 
-public class UnsafeInstance {
+public final class UnsafeInstance {
     private static Unsafe instance;
 
     public static Unsafe getUnsafe() {

@@ -1,13 +1,14 @@
 package net.minecraft.src;
 
 import net.minecraft.client.Minecraft;
-import net.tracystacktrace.stackem.modloader.CacheConfig;
+import net.tracystacktrace.stackem.tools.CacheConfig;
 import net.tracystacktrace.stackem.modloader.ModLoaderStackedImpl;
 import net.tracystacktrace.stackem.modloader.gui.GuiTextureStack;
 import net.tracystacktrace.stackem.modloader.imageglue.ImageGlueBridge;
 import net.tracystacktrace.stackem.modloader.imageglue.segment.SegmentsProvider;
 import net.tracystacktrace.stackem.modloader.patch.CompatibilityTools;
 import net.tracystacktrace.stackem.modloader.patch.QuickEntityRenderer;
+import net.tracystacktrace.stackem.tools.SystemIOTools;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -35,7 +36,7 @@ public class mod_StackEmNeptune extends BaseMod {
                 .forEach(collector::add);
 
         if (init) {
-            CompatibilityTools.log("How many texturepacks were pre-fetched? " + collector.size());
+            SystemIOTools.log("How many texturepacks were pre-fetched? " + collector.size());
         }
 
         if (client.texturePackList.selectedTexturePack != null) {
@@ -75,7 +76,7 @@ public class mod_StackEmNeptune extends BaseMod {
     @Override
     public void modsLoaded() {
         if (!(ModLoader.getMinecraftInstance().entityRenderer instanceof QuickEntityRenderer)) {
-            CompatibilityTools.log("Warning! Something cancelled custom EntityRenderer code; are you using OverrideAPI?");
+            SystemIOTools.log("Warning! Something cancelled custom EntityRenderer code; are you using OverrideAPI?");
             ModLoader.setInGameHook(this, true, false);
             ModLoader.setInGUIHook(this, true, false);
         }
@@ -98,16 +99,16 @@ public class mod_StackEmNeptune extends BaseMod {
     }
 
     static {
-        CompatibilityTools.log("Preparing the environment, thinking very hard!");
+        SystemIOTools.log("Preparing the environment, thinking very hard!");
         CompatibilityTools.getKnownWithEnvironment();
         CompatibilityTools.obtainCurrentLang();
         SegmentsProvider.loadSegmentsData();
 
         if (!CompatibilityTools.OBFUSCATED_ENV) {
-            CompatibilityTools.log("Running in DEV environment, no obfuscation present!");
+            SystemIOTools.log("Running in DEV environment, no obfuscation present!");
         }
 
-        CompatibilityTools.log("Initializing mod, applying required patches");
+        SystemIOTools.log("Initializing mod, applying required patches");
         final Minecraft client = ModLoader.getMinecraftInstance();
 
         // Quickly form config folder

@@ -1,6 +1,5 @@
 package net.tracystacktrace.stackem.modloader.imageglue;
 
-import net.minecraft.client.Minecraft;
 import net.tracystacktrace.stackem.modloader.imageglue.segment.SegmentedTexture;
 import net.tracystacktrace.stackem.tools.ImageHelper;
 
@@ -84,9 +83,9 @@ public class ImageGlueContainer {
         this.original.flush();
     }
 
-    public void debugSave(String name) {
+    public void debugSave(File minecraftDir, String name) {
         try {
-            ImageIO.write(canvas, "png", new File(Minecraft.getMinecraftDir(), name + ".png"));
+            ImageIO.write(canvas, "png", new File(minecraftDir, name + ".png"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -7,11 +7,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public final class ImageHelper {
-    @FunctionalInterface
-    public interface InnerFunc1<T, R, E extends Exception> {
-        R apply(T a) throws E;
-    }
-
     /**
      * Creates a full copy of the ARGB image that is separate object with no any kind of attachment. A simple {@link Object#clone()} won't really work in most cases, so why not?
      * <br>
@@ -52,9 +47,8 @@ public final class ImageHelper {
         return outputImage;
     }
 
-    public static BufferedImage readImage(InnerFunc1<String, InputStream, IOException> getResourceAsStream, String name) {
+    public static BufferedImage readImageAndClose(InputStream inputStream) {
         try {
-            final InputStream inputStream = getResourceAsStream.apply(name);
             final BufferedImage image = ImageIO.read(inputStream);
             inputStream.close();
             return image;

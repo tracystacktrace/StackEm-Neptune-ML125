@@ -9,7 +9,7 @@ public final class RenderEngineHacks {
     /**
      * Deobfuscated name: textureMap
      * <br>
-     * Current obfuscated name: b
+     * Current obfuscated name: d
      */
     @SuppressWarnings("rawtypes")
     private static Map getTextureMap(RenderEngine renderEngine) {

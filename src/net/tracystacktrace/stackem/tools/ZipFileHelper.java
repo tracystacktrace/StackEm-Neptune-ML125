@@ -6,21 +6,15 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 public final class ZipFileHelper {
-    @FunctionalInterface
-    public interface FunctionException<T, R, E extends Exception> {
-        R apply(T a) throws E;
-    }
-
-    public static <T> T readTextFile(
-            ZipFile file,
-            String location,
-            FunctionException<BufferedReader, T, IOException> generator
-    ) {
+    @SuppressWarnings("Convert2Diamond")
+    public static String[] readTextFile(ZipFile file, String location) {
         if (location.startsWith("/")) {
             location = location.substring(1);
         }
@@ -30,18 +24,27 @@ public final class ZipFileHelper {
             return null;
         }
 
-        try (InputStream inputStream = file.getInputStream(entry);
-             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
-            return generator.apply(reader);
+        try {
+            final InputStream inputStream = file.getInputStream(entry);
+            //noinspection CharsetObjectCanBeUsed
+            final BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, Charset.forName("UTF-8")));
+            final List<String> collector = new ArrayList<String>();
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                collector.add(line);
+            }
+
+            reader.close();
+            inputStream.close();
+
+            return collector.toArray(new String[0]);
         } catch (IOException e) {
             return null;
         }
     }
 
-    public static BufferedImage readImage(
-            ZipFile file,
-            String location
-    ) {
+    public static BufferedImage readImage(ZipFile file, String location) {
         if (location.startsWith("/")) {
             location = location.substring(1);
         }
@@ -51,8 +54,11 @@ public final class ZipFileHelper {
             return null;
         }
 
-        try (InputStream inputStream = file.getInputStream(entry)) {
-            return ImageIO.read(inputStream);
+        try {
+            final InputStream inputStream = file.getInputStream(entry);
+            final BufferedImage returnValue = ImageIO.read(inputStream);
+            inputStream.close();
+            return returnValue;
         } catch (IOException ignored) {
             return null;
         }
