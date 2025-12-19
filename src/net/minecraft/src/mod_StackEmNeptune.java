@@ -1,13 +1,15 @@
 package net.minecraft.src;
 
 import net.minecraft.client.Minecraft;
-import net.tracystacktrace.stackem.tools.CacheConfig;
 import net.tracystacktrace.stackem.modloader.ModLoaderStackedImpl;
 import net.tracystacktrace.stackem.modloader.gui.GuiTextureStack;
-import net.tracystacktrace.stackem.modloader.imageglue.ImageGlueBridge;
-import net.tracystacktrace.stackem.modloader.imageglue.segment.SegmentsProvider;
+import net.tracystacktrace.stackem.neptune.IGameTexturesManager;
+import net.tracystacktrace.stackem.neptune.imageglue.ImageGlueBridge;
+import net.tracystacktrace.stackem.neptune.imageglue.segment.SegmentsProvider;
 import net.tracystacktrace.stackem.modloader.patch.CompatibilityTools;
+import net.tracystacktrace.stackem.modloader.patch.MyGameTexturesManager;
 import net.tracystacktrace.stackem.modloader.patch.QuickEntityRenderer;
+import net.tracystacktrace.stackem.tools.CacheConfig;
 import net.tracystacktrace.stackem.tools.SystemIOTools;
 
 import java.io.File;
@@ -17,6 +19,15 @@ import java.util.List;
 import java.util.Objects;
 
 public class mod_StackEmNeptune extends BaseMod {
+
+    private static IGameTexturesManager mod1;
+
+    public static IGameTexturesManager getGameTextureManager() {
+        if (mod1 == null) {
+            mod1 = new MyGameTexturesManager(ModLoader.getMinecraftInstance().renderEngine);
+        }
+        return mod1;
+    }
 
     public static void applyCachedTexturepackStack(Minecraft client, boolean init, File configFolder) {
         // Fallback to default texturepack
@@ -53,7 +64,7 @@ public class mod_StackEmNeptune extends BaseMod {
             client.renderEngine.refreshTextures();
         }
 
-        ImageGlueBridge.processTexturesSegments(client.renderEngine);
+        ImageGlueBridge.processTexturesSegments(mod_StackEmNeptune.getGameTextureManager());
     }
 
     @Override
@@ -102,7 +113,7 @@ public class mod_StackEmNeptune extends BaseMod {
         SystemIOTools.log("Preparing the environment, thinking very hard!");
         CompatibilityTools.getKnownWithEnvironment();
         CompatibilityTools.obtainCurrentLang();
-        SegmentsProvider.loadSegmentsData();
+        SegmentsProvider.loadSegmentsData(mod_StackEmNeptune.class.getResourceAsStream("/assets/stackemneptune/stackem.segments.txt"));
 
         if (!CompatibilityTools.OBFUSCATED_ENV) {
             SystemIOTools.log("Running in DEV environment, no obfuscation present!");

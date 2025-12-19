@@ -42,7 +42,7 @@ public final class FetchMaster {
     public static PreviewTexturePack buildPreview(File texturepackFile) {
         // Check for basic existence of the file
         if (!texturepackFile.exists() || !texturepackFile.isFile()) {
-            System.out.printf("[Stack 'Em] Not a file (ignoring): %s\n", texturepackFile.getName());
+            SystemIOTools.log("Not a valid texturepack file (ignoring): %s\n", texturepackFile.getName());
             return null;
         }
 
@@ -52,7 +52,7 @@ public final class FetchMaster {
             sha256 = SystemIOTools.computeSHA256(texturepackFile);
         } catch (IOException e) {
             sha256 = "N/A";
-            SystemIOTools.log(String.format("Failed to caclulate SHA-256 for the zip file %s", texturepackFile.getName()));
+            SystemIOTools.log("Failed to caclulate SHA-256 for the zip file %s", texturepackFile.getName());
             SystemIOTools.log(e.getMessage());
         }
 
@@ -63,7 +63,7 @@ public final class FetchMaster {
 
             // If pack.txt is empty - ignore
             if (packTxtContent == null || packTxtContent.length < 1) {
-                SystemIOTools.log(String.format("File %s does not contain pack.txt, ignoring", texturepackFile.getName()));
+                SystemIOTools.log("File %s does not contain pack.txt, ignoring", texturepackFile.getName());
                 return null;
             }
 

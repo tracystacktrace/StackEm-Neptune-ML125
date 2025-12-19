@@ -6,7 +6,7 @@ import net.minecraft.src.GuiScreen;
 import net.minecraft.src.TexturePackDefault;
 import net.minecraft.src.mod_StackEmNeptune;
 import net.tracystacktrace.stackem.modloader.ModLoaderStackedImpl;
-import net.tracystacktrace.stackem.modloader.imageglue.ImageGlueBridge;
+import net.tracystacktrace.stackem.neptune.imageglue.ImageGlueBridge;
 import net.tracystacktrace.stackem.modloader.patch.CompatibilityTools;
 import net.tracystacktrace.stackem.neptune.container.PreviewTexturePack;
 import net.tracystacktrace.stackem.neptune.fetch.FetchMaster;
@@ -291,7 +291,7 @@ public class GuiTextureStack extends GuiScreen {
         this.mc.texturePackList.setTexturePack(stacked);
 
         this.mc.renderEngine.refreshTextures();
-        ImageGlueBridge.processTexturesSegments(this.mc.renderEngine);
+        ImageGlueBridge.processTexturesSegments(mod_StackEmNeptune.getGameTextureManager());
 
         this.mc.renderGlobal.loadRenderers();
 

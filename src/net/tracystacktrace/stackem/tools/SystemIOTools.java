@@ -22,6 +22,10 @@ public final class SystemIOTools {
         );
     }
 
+    public static void log(String message, String arg0) {
+        log(String.format(message, arg0));
+    }
+
     public static boolean classExists(String s) {
         try {
             Class.forName(s);

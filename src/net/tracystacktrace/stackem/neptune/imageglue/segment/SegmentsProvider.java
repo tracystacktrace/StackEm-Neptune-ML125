@@ -1,6 +1,5 @@
-package net.tracystacktrace.stackem.modloader.imageglue.segment;
+package net.tracystacktrace.stackem.neptune.imageglue.segment;
 
-import net.tracystacktrace.stackem.modloader.patch.CompatibilityTools;
 import net.tracystacktrace.stackem.tools.SystemIOTools;
 
 import java.io.BufferedReader;
@@ -9,14 +8,12 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public final class SegmentsProvider {
     public static SegmentedTexture[] TEXTURES;
 
-    public static void loadSegmentsData() {
-        final InputStream inputStream = CompatibilityTools.class.getResourceAsStream("/assets/stackemneptune/stackem.segments.txt");
+    public static void loadSegmentsData(final InputStream inputStream) {
         if (inputStream == null) {
             SystemIOTools.log("Couldn't find stackem.segments.txt! Corrupted mod zip?");
             return;
@@ -42,6 +39,7 @@ public final class SegmentsProvider {
     }
 
     // texture/path.png: [];[]
+    @SuppressWarnings("Convert2Diamond")
     private static SegmentedTexture tryToUnpack(String line) {
         final String[] rawStrip = line.split(":");
 
@@ -69,14 +67,15 @@ public final class SegmentsProvider {
             return new SegmentedTexture(rawStrip[0].trim(), genArray);
         }
 
-        final int[][] data = Arrays.stream(rawStrip[1].trim().split(";"))
-                .map(String::trim)
-                .filter(s -> s.startsWith("[") && s.endsWith("]"))
-                .map(SegmentsProvider::unpackSegment)
-                .distinct()
-                .toArray(int[][]::new);
+        final List<int[]> data = new ArrayList<int[]>();
+        for (String c : rawStrip[1].trim().split(";")) {
+            c = c.trim();
+            if (c.startsWith("[") && c.endsWith("]")) {
+                data.add(unpackSegment(c));
+            }
+        }
 
-        return new SegmentedTexture(rawStrip[0].trim(), data);
+        return new SegmentedTexture(rawStrip[0].trim(), data.toArray(new int[0][]));
     }
 
     private static int[] unpackSegment(String s) {
@@ -87,5 +86,4 @@ public final class SegmentsProvider {
         }
         return cookedInts;
     }
-
 }

@@ -1,6 +1,6 @@
-package net.tracystacktrace.stackem.modloader.imageglue;
+package net.tracystacktrace.stackem.neptune.imageglue;
 
-import net.tracystacktrace.stackem.modloader.imageglue.segment.SegmentedTexture;
+import net.tracystacktrace.stackem.neptune.imageglue.segment.SegmentedTexture;
 import net.tracystacktrace.stackem.tools.ImageHelper;
 
 import javax.imageio.ImageIO;

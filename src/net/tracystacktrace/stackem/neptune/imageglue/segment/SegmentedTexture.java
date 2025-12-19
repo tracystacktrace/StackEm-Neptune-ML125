@@ -1,4 +1,4 @@
-package net.tracystacktrace.stackem.modloader.imageglue.segment;
+package net.tracystacktrace.stackem.neptune.imageglue.segment;
 
 
 public class SegmentedTexture {

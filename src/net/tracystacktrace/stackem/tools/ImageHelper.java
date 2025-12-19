@@ -32,11 +32,7 @@ public final class ImageHelper {
         return check != null && check.getWidth() == check.getHeight();
     }
 
-    public static BufferedImage scaleImage(
-            BufferedImage original,
-            int targetWidth,
-            int targetHeight
-    ) {
+    public static BufferedImage scaleImage(BufferedImage original, int targetWidth, int targetHeight) {
         final Image resultingImage = original.getScaledInstance(targetWidth, targetHeight, Image.SCALE_DEFAULT);
         final BufferedImage outputImage = new BufferedImage(targetWidth, targetHeight, BufferedImage.TYPE_INT_ARGB);
 
