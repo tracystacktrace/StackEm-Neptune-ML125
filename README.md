@@ -1,17 +1,8 @@
-
-> [!WARNING]  
-> This source set of Stack 'Em Neptune is supported on following environments:
-> - **ModLoader/Forge 1.2.5**: `-ml125` suffix.
->
-> For other supported minecraft versions ports, please follow these links: <br>
-> **b1.7.3**: https://github.com/tracystacktrace/StackEm-Neptune-ML <br>
-> **1.2.5**: https://github.com/tracystacktrace/StackEm-Neptune-ML125
+# The repository has migrated to codeberg.org, and will be maintained there: https://codeberg.org/tracystacktrace/stackem-neptune-r125
 
 <div align="center" style="text-align: center;">
 
 ![](https://github.com/tracystacktrace/StackEm-Neptune-ML/raw/ml_b173/docs/mod_logo.png)
-
-[![Available on - Modrinth](https://img.shields.io/badge/Available_on-Modrinth-4bab62?logo=modrinth&logoColor=white)](https://modrinth.com/mod/stack-em-neptune) ![GitHub License](https://img.shields.io/github/license/tracystacktrace/StackEm-Neptune-ML125?label=License&color=blue) ![GitHub Tag](https://img.shields.io/github/v/tag/tracystacktrace/StackEm-Neptune-ML125?label=Version)
 
 </div>
 
